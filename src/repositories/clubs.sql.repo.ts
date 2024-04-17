@@ -9,19 +9,22 @@ const debug = createDebug('W07:club:repository:sql');
 const select = {
   id: true,
   name: true,
-  country: true,
+  country: {
+    select: {
+      name: true,
+      continent: true,
+    },
+  },
 };
 
-export class ClubSqlRepo implements AppRepo<Club, ClubCreateDto> {
+export class ClubsSqlRepo implements AppRepo<Club, ClubCreateDto> {
   constructor(private readonly prisma: PrismaClient) {
     debug('Instantiated Clubs SQL repository');
   }
 
   async readAll() {
-    const rockSongs = await this.prisma.club.findMany({
-      distinct: ['createdAt', 'updatedAt'],
-    });
-    return rockSongs;
+    const club = this.prisma.club.findMany({ select });
+    return club;
   }
 
   async readById(id: string) {
@@ -39,9 +42,7 @@ export class ClubSqlRepo implements AppRepo<Club, ClubCreateDto> {
 
   async create(data: ClubCreateDto) {
     return this.prisma.club.create({
-      data: {
-        ...data,
-      },
+      data,
       select,
     });
   }

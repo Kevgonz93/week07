@@ -7,7 +7,7 @@ import { RockSongsController } from './controllers/rocksongs.controllers.js';
 import { ErrorsMiddleware } from './middleware/errors.middleware.js';
 import { type PrismaClient } from '@prisma/client';
 import { ClubsController } from './controllers/clubs.controllers.js';
-import { ClubSqlRepo } from './repositories/clubs.sql.repo.js';
+import { ClubsSqlRepo } from './repositories/clubs.sql.repo.js';
 import { ClubsRouter } from './routes/clubs.routes.js';
 import { UsersSqlRepo } from './repositories/users.sql.repo.js';
 import { RockSongsSqlRepo } from './repositories/rocksongs.sql.repo.js';
@@ -32,7 +32,7 @@ export const startApp = (app: Express, prisma: PrismaClient) => {
   app.use(cors());
   app.use(express.static('public'));
 
-  const clubsRepo = new ClubSqlRepo(prisma);
+  const clubsRepo = new ClubsSqlRepo(prisma);
   const clubsController = new ClubsController(clubsRepo);
   const clubsRouter = new ClubsRouter(clubsController);
   app.use('/clubs', clubsRouter.router);
