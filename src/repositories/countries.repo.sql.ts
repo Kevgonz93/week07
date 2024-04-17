@@ -13,18 +13,21 @@ const select = {
   id: true,
   name: true,
   continent: true,
+  clubs: {
+    select: {
+      id: true,
+      name: true,
+    },
+  },
 };
 
 export class CountriesSqlRepo implements AppRepo<Country, CountryCreateDto> {
   constructor(private readonly prisma: PrismaClient) {
-    debug('Instantiated Clubs SQL repository');
+    debug('Instantiated Countries SQL repository');
   }
 
   async readAll() {
-    const country = await this.prisma.country.findMany({
-      distinct: ['createdAt', 'updatedAt'],
-    });
-    return country;
+    return this.prisma.country.findMany({ select });
   }
 
   async readById(id: string) {

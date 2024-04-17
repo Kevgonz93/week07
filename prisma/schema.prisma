@@ -16,7 +16,8 @@ datasource db {
 model Club {
   id          String   @id @default(cuid())
   name        String   
-  country     String
+  country     Country @relation(fields: [countryId], references: [id])
+  countryId   String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -36,6 +37,7 @@ model Country {
   continent String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  clubs      Club[]
 }
 
 model User{

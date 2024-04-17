@@ -1,10 +1,12 @@
+import { type Country } from '../country/country.js';
+
 export type Club = {
   id: string;
   name: string;
-  country: string;
+  country: Partial<Country>;
 };
 
 export type ClubCreateDto = {
   name: string;
-  country: string;
+  countryId: string;
 };
