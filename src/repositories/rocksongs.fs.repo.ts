@@ -1,21 +1,25 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import createDebug from 'debug';
-import { type RockSong, type RockSongCreateDto } from '../entities/rocksong.js';
+import {
+  type RockSong,
+  type RockSongCreateDto,
+} from '../entities/rockSongs/rocksong.js';
 import { readFile, writeFile } from 'fs/promises';
 
 const debug = createDebug('W07:rocksongs:repository:fs');
+
 export class RockSongsFsRepo {
   constructor() {
     debug('Instantiated articles fs repository');
   }
 
   private async load(): Promise<RockSong[]> {
-    const data = await readFile('rockSongs.json', 'utf-8');
+    const data = await readFile('rocksongs.json', 'utf-8');
     return JSON.parse(data) as RockSong[];
   }
 
   private async save(rockSongs: RockSong[]) {
-    await writeFile('rockSongs.json', JSON.stringify(rockSongs, null, 2));
+    await writeFile('rocksongs.json', JSON.stringify(rockSongs, null, 2));
   }
 
   async readAll() {
@@ -37,6 +41,7 @@ export class RockSongsFsRepo {
   async create(data: RockSongCreateDto) {
     const newRockSong: RockSong = {
       id: crypto.randomUUID(),
+      album: data.album ?? '',
       ...data,
     };
     let rockSongs = await this.load();

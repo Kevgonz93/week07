@@ -1,15 +1,24 @@
 import createDebug from 'debug';
 import { createServer } from 'http';
 import 'dotenv/config';
-import { createApp } from './app.js';
+import { createApp, startApp } from './app.js';
+import { dbConnect } from './tools/db.connect.js';
 
 const debug = createDebug('W07:server');
 debug('Starting server');
 
 const port = process.env.PORT ?? 2000;
-const server = createServer(createApp());
+const app = createApp();
+const server = createServer(app);
 
-server.listen(port);
+dbConnect()
+  .then((prisma) => {
+    startApp(app, prisma);
+    server.listen(port);
+  })
+  .catch((error) => {
+    server.emit('error', error);
+  });
 
 server.on('error', (error) => {
   debug('Error', error);
@@ -17,5 +26,5 @@ server.on('error', (error) => {
 });
 
 server.on('listening', () => {
-  debug(`Server is running on http://localhots:${port}`);
+  debug(`Server is running on http://localhost:${port}`);
 });
