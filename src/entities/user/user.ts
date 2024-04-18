@@ -1,11 +1,15 @@
+import { type Club } from '../club/club.js';
+
 export type User = {
   id: string;
   name: string;
   lastname: string;
   email: string;
-  password: string;
+  password?: string;
   birthDate: Date;
   role: 'admin' | 'user' | 'guest';
+  // eslint-disable-next-line @typescript-eslint/array-type
+  club: Partial<Club>[];
 };
 
 export type UserCreateDto = {
@@ -14,7 +18,6 @@ export type UserCreateDto = {
   email: string;
   password: string;
   birthDateString: string;
-  role: 'admin' | 'user' | 'guest';
 };
 
 export type UserUpdateDto = Partial<UserCreateDto>;

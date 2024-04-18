@@ -19,6 +19,16 @@ const select = {
       name: true,
     },
   },
+  fans: {
+    select: {
+      id: true,
+      name: true,
+      lastname: true,
+      email: true,
+      role: true,
+      birthDate: true,
+    },
+  },
 };
 
 export class CountriesSqlRepo implements AppRepo<Country, CountryCreateDto> {

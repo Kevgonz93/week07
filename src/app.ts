@@ -16,6 +16,7 @@ import { UsersRouter } from './routes/users.routes.js';
 import { CountriesSqlRepo } from './repositories/countries.repo.sql.js';
 import { CountriesController } from './controllers/countries.controllers.js';
 import { CountriesRouter } from './routes/countries.routes.js';
+import { AuthInterceptor } from './middleware/auth.interceptor.js';
 
 const debug = createDebug('W07:APP');
 
@@ -32,24 +33,32 @@ export const startApp = (app: Express, prisma: PrismaClient) => {
   app.use(cors());
   app.use(express.static('public'));
 
+  const authInterceptor = new AuthInterceptor();
+
   const clubsRepo = new ClubsSqlRepo(prisma);
   const clubsController = new ClubsController(clubsRepo);
-  const clubsRouter = new ClubsRouter(clubsController);
+  const clubsRouter = new ClubsRouter(clubsController, authInterceptor);
   app.use('/clubs', clubsRouter.router);
 
   const rockSongsRepo = new RockSongsSqlRepo(prisma);
   const rockSongController = new RockSongsController(rockSongsRepo);
-  const rockSongsRouter = new RockSongsRouter(rockSongController);
+  const rockSongsRouter = new RockSongsRouter(
+    rockSongController,
+    authInterceptor
+  );
   app.use('/rocksongs', rockSongsRouter.router);
 
   const usersRepo = new UsersSqlRepo(prisma);
   const usersController = new UsersController(usersRepo);
-  const usersRouter = new UsersRouter(usersController);
+  const usersRouter = new UsersRouter(usersController, authInterceptor);
   app.use('/users', usersRouter.router);
 
   const countriesRepo = new CountriesSqlRepo(prisma);
   const countriesController = new CountriesController(countriesRepo);
-  const countriesRouter = new CountriesRouter(countriesController);
+  const countriesRouter = new CountriesRouter(
+    countriesController,
+    authInterceptor
+  );
   app.use('/countries', countriesRouter.router);
 
   const errorsMiddleware = new ErrorsMiddleware();

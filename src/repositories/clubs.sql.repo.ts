@@ -15,7 +15,7 @@ const select = {
       continent: true,
     },
   },
-  fan: {
+  fans: {
     select: {
       name: true,
       lastname: true,
