@@ -9,7 +9,10 @@ import {
 
 const debug = createDebug('W07:users:controller');
 
-export class UsersController extends AppController<User, UserCreateDto> {
+export class UsersController extends AppController<
+  Omit<User, 'password'>,
+  UserCreateDto
+> {
   constructor(protected readonly repo: AppRepo<User, UserCreateDto>) {
     super(repo, userCreateDtoSchema, userUpdateDtoSchema);
     debug('Instantieated users controller');
