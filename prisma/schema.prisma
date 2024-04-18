@@ -18,6 +18,8 @@ model Club {
   name        String   
   country     Country @relation(fields: [countryId], references: [id])
   countryId   String
+  fan         User @relation(fields: [fanId], references: [id])
+  fanId       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -41,10 +43,20 @@ model Country {
 }
 
 model User{
-  id        String @id @default(cuid())
-  name      String
-  lastname  String
-  email     String
+  id          String @id @default(cuid())
+  name        String
+  lastname    String
+  email       String
+  password    String
+  birthDate   DateTime
+  role        Role @default(user)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  clubs       Club[]
+}
+
+enum Role {
+  user
+  admin
+  guest
 }

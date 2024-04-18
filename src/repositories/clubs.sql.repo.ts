@@ -15,6 +15,14 @@ const select = {
       continent: true,
     },
   },
+  fan: {
+    select: {
+      name: true,
+      lastname: true,
+      email: true,
+      birthDate: true,
+    },
+  },
 };
 
 export class ClubsSqlRepo implements AppRepo<Club, ClubCreateDto> {
