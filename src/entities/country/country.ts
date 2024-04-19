@@ -4,6 +4,7 @@ export type Country = {
   id: string;
   name: string;
   continent: string;
+  fans: Partial<Club>;
 };
 
 export type CountryCreateDto = {
