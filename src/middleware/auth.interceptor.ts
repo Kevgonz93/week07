@@ -1,7 +1,7 @@
 import { type NextFunction, type Request, type Response } from 'express';
 import createDebug from 'debug';
 import { HttpError } from '../middleware/errors.middleware.js';
-import { Auth } from '../services/auth.services.js';
+import { type AppPayload, Auth } from '../services/auth.services.js';
 const debug = createDebug('W07:errors:middleware');
 
 export class AuthInterceptor {
@@ -30,5 +30,19 @@ export class AuthInterceptor {
     } catch (error) {
       next(error);
     }
+  }
+
+  autorization(req: Request, res: Response, next: NextFunction) {
+    const { payload } = req.body as { payload: AppPayload };
+    const { id } = req.params;
+    if (payload.id !== id) {
+      throw new HttpError(
+        404,
+        'Not Found',
+        `Email/name and password are required`
+      );
+    }
+
+    next();
   }
 }

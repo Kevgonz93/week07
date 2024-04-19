@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-extraneous-class */
-import { type Payload } from '@prisma/client/runtime/library';
 import { hash, compare } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
