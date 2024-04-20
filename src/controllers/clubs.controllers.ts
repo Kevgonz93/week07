@@ -7,7 +7,7 @@ import {
 import { AppController } from './app.controllers.js';
 import { type AppRepo } from '../repositories/app.repo.js';
 import { type Response, type NextFunction, type Request } from 'express';
-import { type Payload } from '../services/auth.services.js';
+import { type AppPayload } from '../services/auth.services.js';
 
 const debug = createDebug('W07:clubs:controller');
 
@@ -19,10 +19,10 @@ export class ClubsController extends AppController<Club, ClubCreateDto> {
 
   async create(req: Request, res: Response, next: NextFunction) {
     debug('Creating Clubs');
-    req.body.userId = (req.body.payload as Payload).id;
+    req.body.userId = (req.body.payload as AppPayload).id;
 
     const { payload, ...rest } = req.body as ClubCreateDto & {
-      payload: Payload;
+      payload: AppPayload;
     };
     req.body = rest;
 
