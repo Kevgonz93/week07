@@ -3,7 +3,7 @@ import createDebug from 'debug';
 import {
   type RockSong,
   type RockSongCreateDto,
-} from '../entities/rockSongs/rocksong.js';
+} from '../../entities/rockSongs/rocksong.js';
 import { readFile, writeFile } from 'fs/promises';
 
 const debug = createDebug('W07:rocksongs:repository:fs');

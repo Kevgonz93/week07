@@ -1,8 +1,8 @@
 import createDebug from 'debug';
 import { type PrismaClient } from '@prisma/client';
-import { type Club, type ClubCreateDto } from '../entities/club/club.js';
-import { HttpError } from '../middleware/errors.middleware.js';
-import { type AppRepo } from './app.repo.js';
+import { type Club, type ClubCreateDto } from '../../entities/club/club.js';
+import { HttpError } from '../../middleware/errors.middleware.js';
+import { type AppRepo } from '../app/app.repo.js';
 
 const debug = createDebug('W07:club:repository:sql');
 

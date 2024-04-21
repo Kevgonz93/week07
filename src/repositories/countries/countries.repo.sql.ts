@@ -1,11 +1,11 @@
 import createDebug from 'debug';
 import { type PrismaClient } from '@prisma/client';
-import { type AppRepo } from './app.repo.js';
+import { type AppRepo } from '../app/app.repo.js';
 import {
   type Country,
   type CountryCreateDto,
-} from '../entities/country/country.js';
-import { HttpError } from '../middleware/errors.middleware.js';
+} from '../../entities/country/country.js';
+import { HttpError } from '../../middleware/errors.middleware.js';
 
 const debug = createDebug('W07:countries:repository:sql');
 

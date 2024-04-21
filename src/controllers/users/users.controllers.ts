@@ -1,14 +1,14 @@
 import createDebug from 'debug';
-import { type User, type UserCreateDto } from '../entities/user/user.js';
-import { type WithLoginRepo } from '../repositories/app.repo.js';
-import { AppController } from './app.controllers.js';
+import { type User, type UserCreateDto } from '../../entities/user/user.js';
+import { type WithLoginRepo } from '../../repositories/app/app.repo.js';
+import { AppController } from '../app/app.controllers.js';
 import {
   userCreateDtoSchema,
   userUpdateDtoSchema,
-} from '../entities/user/user.schema.js';
+} from '../../entities/user/user.schema.js';
 import { type Response, type NextFunction, type Request } from 'express';
-import { HttpError } from '../middleware/errors.middleware.js';
-import { Auth } from '../services/auth.services.js';
+import { HttpError } from '../../middleware/errors.middleware.js';
+import { Auth } from '../../services/auth.services.js';
 
 const debug = createDebug('W07:users:controller');
 
