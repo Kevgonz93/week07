@@ -5,7 +5,7 @@ import {
   type Request,
 } from 'express';
 import createDebug from 'debug';
-import { type UsersController } from '../controllers/users.controllers.js';
+import { type UsersController } from '../controllers/users/users.controllers.js';
 import { type AuthInterceptor } from '../middleware/auth.interceptor.js';
 
 const debug = createDebug('W07:users:router');

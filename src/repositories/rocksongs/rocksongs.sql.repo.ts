@@ -3,9 +3,9 @@ import createDebug from 'debug';
 import {
   type RockSong,
   type RockSongCreateDto,
-} from '../entities/rockSongs/rocksong.js';
-import { type AppRepo } from './app.repo.js';
-import { HttpError } from '../middleware/errors.middleware.js';
+} from '../../entities/rockSongs/rocksong.js';
+import { type AppRepo } from '../app/app.repo.js';
+import { HttpError } from '../../middleware/errors.middleware.js';
 
 const debug = createDebug('W07:rocksongs:repository:sql');
 

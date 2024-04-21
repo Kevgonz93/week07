@@ -1,8 +1,8 @@
 import createDebug from 'debug';
 import { type PrismaClient } from '@prisma/client';
-import { HttpError } from '../middleware/errors.middleware.js';
-import { type WithLoginRepo, type AppRepo } from './app.repo.js';
-import { type User, type UserCreateDto } from '../entities/user/user.js';
+import { HttpError } from '../../middleware/errors.middleware.js';
+import { type WithLoginRepo, type AppRepo } from '../app/app.repo.js';
+import { type User, type UserCreateDto } from '../../entities/user/user.js';
 
 const debug = createDebug('W07:users:repository:sql');
 

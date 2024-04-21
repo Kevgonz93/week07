@@ -1,8 +1,8 @@
 import { type NextFunction, type Request, type Response } from 'express';
 import createDebug from 'debug';
-import { HttpError } from '../middleware/errors.middleware.js';
+import { HttpError } from '../../middleware/errors.middleware.js';
 import type Joi from 'joi';
-import { type AppRepo } from '../repositories/app.repo.js';
+import { type AppRepo } from '../../repositories/app/app.repo.js';
 
 const debug = createDebug('W07:App:controller');
 

@@ -1,6 +1,6 @@
 import { Router as createRouter } from 'express';
 import createDebug from 'debug';
-import { type RockSongsController } from '../controllers/rocksongs.controllers.js';
+import { type RockSongsController } from '../controllers/rock songs/rocksongs.controllers.js';
 import { type AuthInterceptor } from '../middleware/auth.interceptor.js';
 
 const debug = createDebug('W07:rockSongs:routers');

@@ -1,13 +1,13 @@
 import createDebug from 'debug';
-import { type Club, type ClubCreateDto } from '../entities/club/club.js';
+import { type Club, type ClubCreateDto } from '../../entities/club/club.js';
 import {
   clubCreateDtoSchema,
   clubUpdateDtoSchema,
-} from '../entities/club/club.schema.js';
-import { AppController } from './app.controllers.js';
-import { type AppRepo } from '../repositories/app.repo.js';
+} from '../../entities/club/club.schema.js';
+import { AppController } from '../app/app.controllers.js';
+import { type AppRepo } from '../../repositories/app/app.repo.js';
 import { type Response, type NextFunction, type Request } from 'express';
-import { type AppPayload } from '../services/auth.services.js';
+import { type AppPayload } from '../../services/auth.services.js';
 
 const debug = createDebug('W07:clubs:controller');
 

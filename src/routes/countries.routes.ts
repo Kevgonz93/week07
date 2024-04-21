@@ -1,6 +1,6 @@
 import { Router as createRouter } from 'express';
 import createDebug from 'debug';
-import { type CountriesController } from '../controllers/countries.controllers.js';
+import { type CountriesController } from '../controllers/countries/countries.controllers.js';
 import { type AuthInterceptor } from '../middleware/auth.interceptor.js';
 
 const debug = createDebug('W07:countries:router');
