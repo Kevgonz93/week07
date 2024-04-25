@@ -7,6 +7,7 @@ import {
 import createDebug from 'debug';
 import { type UsersController } from '../controllers/users/users.controllers.js';
 import { type AuthInterceptor } from '../middleware/auth.interceptor.js';
+import { type FilesInterceptor } from '../middleware/files.interceptor.js';
 
 const debug = createDebug('W07:users:router');
 
@@ -15,11 +16,16 @@ export class UsersRouter {
 
   constructor(
     readonly controller: UsersController,
-    readonly authInterceptor: AuthInterceptor
+    readonly authInterceptor: AuthInterceptor,
+    readonly filesInterceptor: FilesInterceptor
   ) {
     debug('Instantiated users router');
 
-    this.router.post('/register', controller.create.bind(controller));
+    this.router.post(
+      '/register',
+      filesInterceptor.sigleFile('avatar'),
+      controller.create.bind(controller)
+    );
     this.router.post('/login', controller.login.bind(controller));
 
     this.router.get(

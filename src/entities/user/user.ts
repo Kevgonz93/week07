@@ -7,6 +7,7 @@ export type User = {
   email: string;
   password?: string;
   birthDate: Date;
+  avatar: string;
   role: 'admin' | 'user' | 'guest';
   // eslint-disable-next-line @typescript-eslint/array-type
   club: Partial<Club>[];
@@ -18,6 +19,7 @@ export type UserCreateDto = {
   email: string;
   password: string;
   birthDateString: string;
+  avatar: string;
 };
 
 export type UserUpdateDto = Partial<UserCreateDto>;

@@ -17,6 +17,9 @@ import { CountriesSqlRepo } from './repositories/countries/countries.repo.sql.js
 import { CountriesController } from './controllers/countries/countries.controllers.js';
 import { CountriesRouter } from './routes/countries.routes.js';
 import { AuthInterceptor } from './middleware/auth.interceptor.js';
+import { FilesController } from './controllers/files.controllers.js';
+import { FilesRouter } from './routes/files.routes.js';
+import { FilesInterceptor } from './middleware/files.interceptor.js';
 
 const debug = createDebug('W07:APP');
 
@@ -34,6 +37,7 @@ export const startApp = (app: Express, prisma: PrismaClient) => {
   app.use(express.static('public'));
 
   const authInterceptor = new AuthInterceptor();
+  const filesInterceptor = new FilesInterceptor();
 
   const clubsRepo = new ClubsSqlRepo(prisma);
   const clubsController = new ClubsController(clubsRepo);
@@ -50,7 +54,11 @@ export const startApp = (app: Express, prisma: PrismaClient) => {
 
   const usersRepo = new UsersSqlRepo(prisma);
   const usersController = new UsersController(usersRepo);
-  const usersRouter = new UsersRouter(usersController, authInterceptor);
+  const usersRouter = new UsersRouter(
+    usersController,
+    authInterceptor,
+    filesInterceptor
+  );
   app.use('/users', usersRouter.router);
 
   const countriesRepo = new CountriesSqlRepo(prisma);
@@ -60,6 +68,10 @@ export const startApp = (app: Express, prisma: PrismaClient) => {
     authInterceptor
   );
   app.use('/countries', countriesRouter.router);
+
+  const filesController = new FilesController();
+  const filesRouter = new FilesRouter(filesController, filesInterceptor);
+  app.use('/files', filesRouter.router);
 
   const errorsMiddleware = new ErrorsMiddleware();
   app.use(errorsMiddleware.handle.bind(errorsMiddleware));

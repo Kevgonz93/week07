@@ -46,9 +46,10 @@ model User{
   id          String @id @default(cuid())
   name        String
   lastname    String
-  email       String
+  email       String @unique
   password    String
   birthDate   DateTime
+  avatar      String @default("sample.png")
   role        Role @default(user)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

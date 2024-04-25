@@ -13,6 +13,7 @@ const select = {
   email: true,
   role: true,
   birthDate: true,
+  avatar: true,
   club: {
     select: {
       id: true,
