@@ -71,7 +71,9 @@ export class UsersController extends AppController<User, UserCreateDto> {
     }
 
     req.body.password = await Auth.hash(req.body.password as string);
-    await super.create(req, res, next);
+    req.body.avatar = req.body.cloudinary?.url as string;
+
+    // Await super.create(req, res, next);
   }
 
   async update(req: Request, res: Response, next: NextFunction) {

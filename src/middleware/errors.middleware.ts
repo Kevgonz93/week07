@@ -1,5 +1,6 @@
 import { type NextFunction, type Request, type Response } from 'express';
 import createDebug from 'debug';
+
 const debug = createDebug('W07:errors:middleware');
 
 export class HttpError extends Error {

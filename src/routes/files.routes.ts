@@ -1,6 +1,6 @@
 import { Router as createRouter } from 'express';
-import { type FilesController } from '../controllers/files.controllers';
-import { type FilesInterceptor } from '../middleware/files.interceptor';
+import { type FilesController } from '../controllers/files.controllers.js';
+import { type FilesInterceptor } from '../middleware/files.interceptor.js';
 
 export class FilesRouter {
   router = createRouter();
@@ -12,6 +12,7 @@ export class FilesRouter {
     this.router.post(
       '/',
       interceptor.sigleFile('avatar').bind(interceptor),
+      interceptor.couldinaryUp.bind(interceptor),
       controller.fileHander.bind(controller)
     );
   }
